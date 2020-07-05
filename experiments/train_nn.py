@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import QuantileTransformer
 import torch
 from torch.utils.data import DataLoader
 
@@ -23,6 +24,12 @@ if __name__ == '__main__':
     y_train = Data.load('../input/y_train.pkl')
     X_test = Data.load('../input/X_test.pkl')
 
+    # rankgauss transform
+    # https://www.kaggle.com/c/porto-seguro-safe-driver-prediction/discussion/44629
+    prep = QuantileTransformer(output_distribution="normal")
+    X_train = pd.DataFrame(prep.fit_transform(X_train))
+    X_test = pd.DataFrame(prep.transform(X_test))
+
     cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=7)
 
     oof_preds = np.zeros(len(X_train))
@@ -30,7 +37,7 @@ if __name__ == '__main__':
     cv_scores = []
 
     test_dataset = BasketDataset(X=X_test, y=None)
-    test_loader = DataLoader(test_dataset, shuffle=False, batch_size=128)
+    test_loader = DataLoader(test_dataset, shuffle=False, batch_size=2000)
 
     for fold_id, (tr_idx, va_idx) in enumerate(cv.split(X_train, y_train)):
 
@@ -42,8 +49,8 @@ if __name__ == '__main__':
         train_dataset = BasketDataset(X=X_tr, y=y_tr)
         valid_dataset = BasketDataset(X=X_val, y=y_val)
 
-        train_loader = DataLoader(train_dataset, shuffle=True, batch_size=128)
-        valid_loader = DataLoader(valid_dataset, shuffle=False, batch_size=128)
+        train_loader = DataLoader(train_dataset, shuffle=True, batch_size=2000)
+        valid_loader = DataLoader(valid_dataset, shuffle=False, batch_size=2000)
 
         loaders = {'train': train_loader, 'valid': valid_loader}
         runner = CustomRunner(device=device)
@@ -92,8 +99,8 @@ if __name__ == '__main__':
 
     # save results
     print(cv_scores)
-    pd.Series(oof_preds).to_csv('../output/submissions/oof.csv', index=False, header=None)
-    pd.Series(test_preds).to_csv('../output/submissions/pred.csv', index=False, header=None)
+    pd.Series(oof_preds).to_csv(f'../output/pred/oof_{run_name}.csv', index=False, header=None)
+    pd.Series(test_preds).to_csv(f'../output/pred/pred_{run_name}.csv', index=False, header=None)
 
     y_pred_test = (test_preds > 0.5).astype(int)
-    pd.Series(y_pred_test).to_csv('../output/submissions/test_prediction.csv', index=False, header=None)
+    pd.Series(y_pred_test).to_csv(f'../output/submissions/test_prediction_{run_name}.csv', index=False, header=None)

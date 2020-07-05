@@ -17,6 +17,12 @@ class BasketDataset:
         cat = 'train' if self.is_train else 'test'
         X_seq_pad = np.zeros(shape=(242, 6), dtype=np.float)
         X_seq = pd.read_csv(f'../input/{cat}/{sid}_feat.csv')
+
+        # sample-wise scaling
+        # https://www.kaggle.com/c/PLAsTiCC-2018/discussion/75116#442741
+        X_seq /= X_seq.std(axis=0).values
+        X_seq.fillna(0, inplace=True)
+
         X_seq_pad[:len(X_seq), :] = X_seq
         return (
             torch.tensor(X_seq_pad).float(),
