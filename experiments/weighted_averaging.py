@@ -56,7 +56,7 @@ def make_submission(pred, run_name: str, th: float):
 
 
 run_ids = [
-    'run001',
+    # 'run001',
     'run003',
 ]
 run_name = 'weight001'
