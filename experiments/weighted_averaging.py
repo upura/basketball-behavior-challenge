@@ -52,11 +52,11 @@ def make_predictions(data: list, weights: list, is_oof=True):
 
 def make_submission(pred, run_name: str, th: float):
     pred = (pred > th).astype(int)
-    pd.Series(pred).to_csv(f'../output/submissions/test_prediction_{run_name}.csv', index=False)
+    pd.Series(pred).to_csv(f'../output/submissions/test_prediction_{run_name}.csv', index=False, header=False)
 
 
 run_ids = [
-    # 'run001',
+    'run001',
     'run003',
 ]
 run_name = 'weight001'
