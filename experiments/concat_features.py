@@ -10,11 +10,15 @@ if __name__ == '__main__':
 
     nn_oof = pd.read_csv(f'../output/pred/oof_nn000.csv', header=None)
     nn_pred = pd.read_csv(f'../output/pred/pred_nn000.csv', header=None)
+    nn1_oof = pd.read_csv(f'../output/pred/oof_nn001.csv', header=None)
+    nn1_pred = pd.read_csv(f'../output/pred/pred_nn001.csv', header=None)
 
     X_train['nn'] = nn_oof.values
     X_test['nn'] = nn_pred.values
+    X_train['nn1'] = nn1_oof.values
+    X_test['nn1'] = nn1_pred.values
 
-    fe_name = 'fe000'
+    fe_name = 'fe001'
     Data.dump(X_train, f'../input/X_train_{fe_name}.pkl')
     Data.dump(y_train, f'../input/y_train_{fe_name}.pkl')
     Data.dump(X_test, f'../input/X_test_{fe_name}.pkl')
