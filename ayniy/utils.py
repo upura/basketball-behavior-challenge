@@ -1,18 +1,19 @@
-import random
-import os
+from contextlib import contextmanager
 import datetime
 import logging
+import os
+import random
+import sys
 import time
+from typing import Union
+
+from IPython.core.display import display, HTML
 import numpy as np
 import pandas as pd
-from sklearn.metrics import f1_score
-from sklearn.metrics import accuracy_score
-from tqdm import tqdm
-from typing import Union
-from sklearn.externals import joblib
-from contextlib import contextmanager
-from IPython.core.display import display, HTML
+from sklearn.metrics import f1_score, accuracy_score
+import joblib
 import torch
+from tqdm import tqdm
 
 
 def seed_everything(seed=777):
@@ -184,7 +185,7 @@ class Logger:
     def __init__(self):
         self.general_logger = logging.getLogger('general')
         self.result_logger = logging.getLogger('result')
-        stream_handler = logging.StreamHandler()
+        stream_handler = logging.StreamHandler(stream=sys.stdout)
         file_general_handler = logging.FileHandler('../output/logs/general.log')
         file_result_handler = logging.FileHandler('../output/logs/result.log')
         if len(self.general_logger.handlers) == 0:

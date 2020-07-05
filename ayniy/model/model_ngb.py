@@ -1,28 +1,27 @@
 import os
 
-import catboost as cb
+from ngboost import NGBRegressor, NGBClassifier
 
 from ayniy.model.model import Model
 from ayniy.utils import Data
 
 
-class ModelCatClassifier(Model):
+# To do: https://github.com/upura/wids2020/blob/master/experiments/exp_62.ipynb
+class ModelNgbClassifier(Model):
 
     def train(self, tr_x, tr_y, va_x=None, va_y=None, te_x=None):
 
         # ハイパーパラメータの設定
         params = dict(self.params)
-        self.model = cb.CatBoostClassifier(**params)
+        early_stopping_rounds = params.pop('early_stopping_rounds')
 
-        self.model.fit(tr_x, tr_y,
-                       cat_features=self.categorical_features,
-                       eval_set=(va_x, va_y),
-                       verbose=100,
-                       use_best_model=True,
-                       plot=False)
+        self.model = NGBClassifier(**params)
+        self.model.fit(tr_x.values, tr_y.astype(int).values,
+                       va_x.values, va_y.astype(int).values,
+                       early_stopping_rounds=early_stopping_rounds)
 
     def predict(self, te_x):
-        return self.model.predict_proba(te_x)[:, 1]
+        return self.model.predict_proba(te_x.values)[:, 1]
 
     def save_model(self):
         model_path = os.path.join('../output/model', f'{self.run_fold_name}.model')
@@ -34,23 +33,21 @@ class ModelCatClassifier(Model):
         self.model = Data.load(model_path)
 
 
-class ModelCatRegressor(Model):
+class ModelNgbRegressor(Model):
 
     def train(self, tr_x, tr_y, va_x=None, va_y=None, te_x=None):
 
         # ハイパーパラメータの設定
         params = dict(self.params)
-        self.model = cb.CatBoostRegressor(**params)
+        early_stopping_rounds = params.pop('early_stopping_rounds')
 
-        self.model.fit(tr_x, tr_y,
-                       cat_features=self.categorical_features,
-                       eval_set=(va_x, va_y),
-                       verbose=100,
-                       use_best_model=True,
-                       plot=False)
+        self.model = NGBRegressor(**params)
+        self.model.fit(tr_x.values, tr_y.astype(int).values,
+                       va_x.values, va_y.astype(int).values,
+                       early_stopping_rounds=early_stopping_rounds)
 
     def predict(self, te_x):
-        return self.model.predict(te_x)
+        return self.model.predict(te_x.values)
 
     def save_model(self):
         model_path = os.path.join('../output/model', f'{self.run_fold_name}.model')

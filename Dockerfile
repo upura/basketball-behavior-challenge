@@ -1,4 +1,4 @@
-FROM gcr.io/kaggle-images/python:v56
+FROM gcr.io/kaggle-images/python:v76
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
@@ -33,6 +33,7 @@ RUN apt-get update --fix-missing && \
     swig mecab libmecab-dev mecab-ipadic-utf8 \
     cmake --fix-missing
 
+COPY requirements.txt .
+
 RUN pip install -U pip && \
-    pip install fastprogress japanize-matplotlib neologdn && \
-    pip install mecab-python3 kaggler
+    pip install -r requirements.txt
