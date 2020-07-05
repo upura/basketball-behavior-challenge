@@ -15,7 +15,7 @@ class BasketDataset:
     def __getitem__(self, i):
         sid = str(i).zfill(4)
         cat = 'train' if self.is_train else 'test'
-        X_seq_pad = np.zeros(shape=(242, 6), dtype=np.float)
+        X_seq_pad = np.zeros(shape=(242, 10), dtype=np.float)
         X_seq = pd.read_csv(f'../input/{cat}/{sid}_feat.csv')
 
         # sample-wise scaling

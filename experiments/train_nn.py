@@ -16,7 +16,7 @@ from ayniy.utils import Data
 
 if __name__ == '__main__':
 
-    run_name = 'nn000'
+    run_name = 'nn001'
     seed_everything(0)
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
@@ -56,7 +56,7 @@ if __name__ == '__main__':
         runner = CustomRunner(device=device)
 
         model = BasketNN(
-            in_channels=6,
+            in_channels=10,
             n_cont_features=X_tr.shape[1],
             hidden_channels=64,
             kernel_sizes=[3, 5, 7, 15, 21, 51],
