@@ -1,0 +1,22 @@
+description: CatBoost
+exp_name: 'basket'
+run_name: 'run002'
+fe_name: 'fe000'
+data:
+  sample_submission: '../input/sample_submission.csv'
+cols_definition:
+  categorical_col: [
+  ]
+model_name: 'ModelCatClassifier'
+params: {
+  'depth': 3,
+  'learning_rate': 0.04,
+  'iterations': 10000,
+  'loss_function': 'Logloss',
+  'eval_metric': 'AUC',
+  'random_seed': 777,
+  'allow_writing_files': False,
+  'task_type': "CPU",
+  'early_stopping_rounds': 50
+}
+evaluation_metric: 'auc'
