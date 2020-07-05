@@ -5,6 +5,7 @@ import torch
 class CustomRunner(Runner):
     def _handle_batch(self, batch):
         seq, cont, y = batch
+        seq = seq.reshape(seq.shape[0], -1, seq.shape[1])
         pred = self.model(seq, cont)
         loss = self.criterion(pred, y)
         self.batch_metrics = {'loss': loss}
