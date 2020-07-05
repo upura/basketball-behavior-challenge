@@ -1,16 +1,9 @@
-from src.datasets import BasketDataset
+import pandas as pd
 
-from ayniy.utils import Data
+cat = 'train'
+sid = '0000'
+X_seq = pd.read_csv(f'../input/{cat}/{sid}_feat.csv')
 
-
-X_train = Data.load('../input/X_train.pkl')
-y_train = Data.load('../input/y_train.pkl')
-X_test = Data.load('../input/X_test.pkl')
-
-print(max(X_train['num_df']))
-print(max(X_test['num_df']))
-
-test_dataset = BasketDataset(X=X_test, y=None)
-
-print(test_dataset)
-print(test_dataset[0])
+print(X_seq)
+print(X_seq.std(axis=0).values)
+print(X_seq / X_seq.std(axis=0).values)
