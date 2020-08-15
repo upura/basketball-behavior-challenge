@@ -280,7 +280,7 @@ class Runner:
 
     def submission(self):
         pred = Data.load(f'../output/pred/{self.run_name}-test.pkl')
-        y_pred_test = (pred > 0.45).astype(int)
+        y_pred_test = (pred > 0.475).astype(int)
         pd.Series(y_pred_test).to_csv(f'../output/submissions/test_prediction_{self.run_name}.csv', index=False, header=None)
 
     def reset_mlflow(self):
