@@ -56,9 +56,9 @@ def make_submission(pred, run_name: str, th: float):
 
 
 run_ids = [
-    'run008'
+    'run009'
 ]
-run_name = 'weight009'
+run_name = 'weight010'
 
 y_train = Data.load('../input/y_train_fe000.pkl')
 data = [load_from_run_id(ri, to_rank=False) for ri in run_ids]

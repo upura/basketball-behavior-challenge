@@ -1,0 +1,15 @@
+description: LightGBM
+exp_name: 'basket'
+run_name: 'run009'
+fe_name: 'fe006'
+data:
+  sample_submission: '../input/sample_submission.csv'
+cols_definition:
+  categorical_col: [
+  ]
+model_name: 'ModelRIDGE'
+params: {
+  'alpha': 10,
+  'random_state': 0
+}
+evaluation_metric: 'auc'
