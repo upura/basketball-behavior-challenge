@@ -67,8 +67,8 @@ if __name__ == '__main__':
                  'num_df']
     X_train.columns = col_names
     X_test.columns = col_names
-    Data.dump(X_train, f'../input/X_train.pkl')
-    Data.dump(X_test, f'../input/X_test.pkl')
+    Data.dump(X_train, '../input/X_train.pkl')
+    Data.dump(X_test, '../input/X_test.pkl')
 
     y_train = pd.Series([1 if i < 400 else 0 for i in range(1528)])
-    Data.dump(y_train, f'../input/y_train.pkl')
+    Data.dump(y_train, '../input/y_train.pkl')

@@ -12,8 +12,8 @@ if __name__ == '__main__':
     # print(fi)
     # X_train = X_train[fi]
     # X_test = X_test[fi]
-    nn_oof = pd.read_csv(f'../output/pred/oof_nn000.csv', header=None)
-    nn_pred = pd.read_csv(f'../output/pred/pred_nn000.csv', header=None)
+    nn_oof = pd.read_csv('../output/pred/oof_nn000.csv', header=None)
+    nn_pred = pd.read_csv('../output/pred/pred_nn000.csv', header=None)
     # nn1_oof = pd.read_csv(f'../output/pred/oof_nn001.csv', header=None)
     # nn1_pred = pd.read_csv(f'../output/pred/pred_nn001.csv', header=None)
 

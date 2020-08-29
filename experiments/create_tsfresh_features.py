@@ -33,8 +33,8 @@ if __name__ == '__main__':
     X_train = pd.concat(X_train).reset_index(drop=True)
     X_test = pd.concat(X_test).reset_index(drop=True)
 
-    Data.dump(X_train, f'../input/X_train_fe002.pkl')
-    Data.dump(X_test, f'../input/X_test_fe002.pkl')
+    Data.dump(X_train, '../input/X_train_fe002.pkl')
+    Data.dump(X_test, '../input/X_test_fe002.pkl')
 
     y_train = pd.Series([1 if i < 400 else 0 for i in range(1528)])
-    Data.dump(y_train, f'../input/y_train_fe002.pkl')
+    Data.dump(y_train, '../input/y_train_fe002.pkl')
