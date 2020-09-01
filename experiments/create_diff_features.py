@@ -14,19 +14,9 @@ def extract_feat(sid: str, cat: str = 'train'):
     df['diff_scr_ball'] = ((df['scr_x'] - df['bal_x'])**2 + (df['scr_y'] - df['bal_y'])**2)
     df['diff_uDF_ball'] = ((df['uDF_x'] - df['bal_x'])**2 + (df['uDF_y'] - df['bal_y'])**2)
 
-    df['scr_v'] = (df['scr_x'].diff() ** 2 + df['scr_y'].diff() ** 2) ** (1 / 2)
-    df['usr_v'] = (df['usr_x'].diff() ** 2 + df['usr_y'].diff() ** 2) ** (1 / 2)
-    df['uDF_v'] = (df['uDF_x'].diff() ** 2 + df['uDF_y'].diff() ** 2) ** (1 / 2)
-    df['bal_v'] = (df['bal_x'].diff() ** 2 + df['bal_y'].diff() ** 2) ** (1 / 2)
-    df['scr_v'].fillna(0, inplace=True)
-    df['usr_v'].fillna(0, inplace=True)
-    df['uDF_v'].fillna(0, inplace=True)
-    df['bal_v'].fillna(0, inplace=True)
-
     use_cols = ['diff_usr_ball', 'diff_usr_uDF',
                 'diff_usr_scr', 'diff_scr_uDF',
-                'diff_scr_ball', 'diff_uDF_ball',
-                'scr_v', 'usr_v', 'uDF_v', 'bal_v']
+                'diff_scr_ball', 'diff_uDF_ball']
 
     df[use_cols].to_csv(f'../input/{cat}/{sid}_feat.csv', index=False)
     return (df['diff_usr_ball'].min(),
@@ -35,10 +25,6 @@ def extract_feat(sid: str, cat: str = 'train'):
             df['diff_scr_uDF'].min(),
             df['diff_scr_ball'].min(),
             df['diff_uDF_ball'].min(),
-            df['scr_v'].max(),
-            df['usr_v'].max(),
-            df['uDF_v'].max(),
-            df['bal_v'].max(),
             len(df))
 
 
@@ -60,10 +46,6 @@ if __name__ == '__main__':
                  'min_diff_scr_uDF',
                  'min_diff_scr_ball',
                  'min_diff_uDF_ball',
-                 'max_scr_v',
-                 'max_usr_v',
-                 'max_uDF_v',
-                 'max_bal_v',
                  'num_df']
     X_train.columns = col_names
     X_test.columns = col_names
