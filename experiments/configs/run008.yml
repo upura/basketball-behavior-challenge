@@ -1,4 +1,4 @@
-description: LightGBM
+description: RIDGE
 exp_name: 'basket'
 run_name: 'run008'
 fe_name: 'fe005'
