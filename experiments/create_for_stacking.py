@@ -14,8 +14,8 @@ def load_from_run_id(run_id: str, to_rank: False):
 
 
 run_ids = [
-    'weight002',
-    'weight004'
+    'run004',
+    'run006'
 ]
 
 y_train = Data.load('../input/y_train_fe000.pkl')
@@ -29,7 +29,7 @@ X_test = pd.concat(test, axis=1)
 X_train.columns = run_ids
 X_test.columns = run_ids
 
-fe_name = 'fe006'
+fe_name = 'fe005'
 Data.dump(X_train, f'../input/X_train_{fe_name}.pkl')
 Data.dump(y_train, f'../input/y_train_{fe_name}.pkl')
 Data.dump(X_test, f'../input/X_test_{fe_name}.pkl')
