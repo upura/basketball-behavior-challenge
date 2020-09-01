@@ -24,7 +24,7 @@ More detailed information is described as follows.
     - Feature importance by LGBM can be seen [here](./output/importance/run004-fi.png).
 - Predictions by 1DCNN is added to features of LGBM.
     - The structure of 1DCNN is highly inspired by [the solution codes of atmaCup #5](https://github.com/amaotone/atmaCup-5) which was a competion with similar task.
-- The weights for averaging and the threshold for 0/1 were determined by [Nelder-Mead](https://docs.scipy.org/doc/scipy/reference/optimize.minimize-neldermead.html) method.
+- The weights for averaging (maximize AUC) and the threshold for 0/1 (maximize ACC) were determined by [Nelder-Mead](https://docs.scipy.org/doc/scipy/reference/optimize.minimize-neldermead.html) method.
 
 LGBM with tsfresh gave me public score 0.8455 and LGBM with tsfresh and 1DCNN gave me 0.8482, and weighted averaging of them scored 0.8586. Ridge stacking of 2 LGBM created diversity, and boosted the score to 0.8639.
 
