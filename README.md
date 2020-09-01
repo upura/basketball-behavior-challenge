@@ -42,9 +42,8 @@ docker-compose up -d --build
 docker exec -it basketball bash
 ```
 
-You can run codes by `run.sh`. This implementation uses a supporting tool for machine learning competitions named [Ayniy](https://github.com/upura/ayniy).
+You can run codes by `experiments/run.sh`. This implementation uses a supporting tool for machine learning competitions named [Ayniy](https://github.com/upura/ayniy).
 
 ```
-cd experiments/
-sh run.sh
+sh experiments/run.sh
 ```
